@@ -10,9 +10,6 @@ import UIKit
 import CoreLocation
 
 class WeatherViewController: UIViewController {
-    
-    var lat: CLLocationDegrees?
-    var lon: CLLocationDegrees?
 
     @IBOutlet weak var conditionImageView: UIImageView!
     @IBOutlet weak var temperatureLabel: UILabel!
@@ -46,10 +43,10 @@ extension WeatherViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
             locationManager.stopUpdatingLocation()
-            lat = location.coordinate.latitude
-            lon = location.coordinate.longitude
+            let lat = location.coordinate.latitude
+            let lon = location.coordinate.longitude
             
-            weatherManager.fetchWeather(latitude: lat!, longtitute: lon!)
+            weatherManager.fetchWeather(latitude: lat, longtitute: lon)
         }
     }
     
@@ -59,7 +56,7 @@ extension WeatherViewController: CLLocationManagerDelegate {
     
     
     @IBAction func locationPressed(_ sender: UIButton) {
-        //weatherManager.fetchWeather(latitude: lat!, longtitute: lon!)
+        
         locationManager.requestLocation()
     }
     
